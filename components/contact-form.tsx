@@ -87,7 +87,6 @@ export function ContactForm() {
         EMAILJS_SERVICE_ID.slice(-4)
       );
 
-      // Use emailjs.send with public key parameter
       const result = await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
