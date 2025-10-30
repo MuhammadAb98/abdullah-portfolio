@@ -26,6 +26,7 @@ import {
 } from "lucide-react"
 import { useTheme } from "next-themes"
 import { ContactForm } from "@/components/contact-form"
+import Image from "next/image"
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -237,6 +238,22 @@ export default function Portfolio() {
 
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="mb-8 flex justify-center"
+            >
+              <div className="relative w-48 h-48 md:w-56 md:h-56">
+                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-emerald-400 to-emerald-600 p-1 shadow-2xl">
+                  <div className="relative w-full h-full rounded-full overflow-hidden bg-white dark:bg-slate-900">
+                    <Image src="/headshot.jpg" alt="Muhammad Abdullah" fill className="object-cover" priority />
+                  </div>
+                </div>
+                <div className="absolute inset-0 rounded-full bg-emerald-500/20 blur-2xl -z-10" />
+              </div>
+            </motion.div>
+
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6">
               Muhammad Abdullah
             </h1>
@@ -499,8 +516,21 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section id="contact" className="relative py-20 px-4 sm:px-6 lg:px-8 bg-slate-900 overflow-hidden">
+        <motion.div
+          className="absolute inset-0 opacity-30"
+          initial={{ background: "radial-gradient(600px at 0% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 80%)" }}
+          animate={{
+            background: [
+              "radial-gradient(600px at 0% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 80%)",
+              "radial-gradient(600px at 100% 100%, rgba(16, 185, 129, 0.15) 0%, transparent 80%)",
+              "radial-gradient(600px at 0% 0%, rgba(16, 185, 129, 0.15) 0%, transparent 80%)",
+            ],
+          }}
+          transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY }}
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -513,61 +543,92 @@ export default function Portfolio() {
               ideas to life.
             </p>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Left: contact info */}
-              <div className="space-y-6">
-                <Card className="bg-slate-800 border-slate-700 text-slate-200">
-                  <CardHeader>
-                    <CardTitle>Contact information</CardTitle>
-                  </CardHeader>
-                  <CardContent className="grid grid-cols-1 gap-6">
-                    <div className="flex items-start gap-3">
-                      <Mail className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Email</p>
-                        <p className="font-medium">muhammadabdullah101998@gmail.com</p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Contact Info Cards */}
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="space-y-6"
+              >
+                {/* Email Card */}
+                <Card className="bg-slate-800/50 border-emerald-500/30 backdrop-blur-sm hover:border-emerald-500/60 transition-colors">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 rounded-lg bg-emerald-500/20">
+                        <Mail className="text-emerald-400" size={24} />
                       </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Phone className="text-emerald-400 mt-1" size={20} />
                       <div>
-                        <p className="text-sm text-slate-400">Phone</p>
-                        <p className="font-medium">+92 312 7677525</p>
+                        <p className="text-sm text-slate-400 mb-1">Email</p>
+                        <p className="font-medium text-white break-all">muhammadabdullah101998@gmail.com</p>
                       </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <MapPin className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Location</p>
-                        <p className="font-medium">Lahore, Pakistan</p>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-3">
-                      <Button
-                        size="sm"
-                        className="bg-emerald-600 hover:bg-emerald-700"
-                        onClick={() => window.open("mailto:muhammadabdullah101998@gmail.com")}
-                      >
-                        <Mail className="mr-2 h-4 w-4" />
-                        Send Email
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-slate-600 text-white hover:bg-slate-800 bg-transparent"
-                        onClick={() => window.open("https://www.linkedin.com/in/muhammadab98/", "_blank")}
-                      >
-                        <Linkedin className="mr-2 h-4 w-4" />
-                        LinkedIn
-                      </Button>
                     </div>
                   </CardContent>
                 </Card>
-              </div>
 
-              {/* Right: form */}
-              <ContactForm />
+                {/* Phone Card */}
+                <Card className="bg-slate-800/50 border-emerald-500/30 backdrop-blur-sm hover:border-emerald-500/60 transition-colors">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 rounded-lg bg-emerald-500/20">
+                        <Phone className="text-emerald-400" size={24} />
+                      </div>
+                      <div>
+                        <p className="text-sm text-slate-400 mb-1">Phone</p>
+                        <p className="font-medium text-white">+92 312 7677525</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Location Card */}
+                <Card className="bg-slate-800/50 border-emerald-500/30 backdrop-blur-sm hover:border-emerald-500/60 transition-colors">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start gap-4">
+                      <div className="p-3 rounded-lg bg-emerald-500/20">
+                        <MapPin className="text-emerald-400" size={24} />
+                      </div>
+                      <div>
+                        <p className="text-sm text-slate-400 mb-1">Location</p>
+                        <p className="font-medium text-white">Lahore, Pakistan</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Action Buttons */}
+                <div className="flex gap-3 pt-4">
+                  <Button
+                    size="sm"
+                    className="bg-emerald-600 hover:bg-emerald-700 flex-1"
+                    onClick={() => window.open("mailto:muhammadabdullah101998@gmail.com")}
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    Email
+                  </Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="border-slate-600 text-white hover:bg-slate-800 bg-transparent flex-1"
+                    onClick={() => window.open("https://www.linkedin.com/in/muhammadab98/", "_blank")}
+                  >
+                    <Linkedin className="mr-2 h-4 w-4" />
+                    LinkedIn
+                  </Button>
+                </div>
+              </motion.div>
+
+              {/* Contact Form - spans 2 columns */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+                className="lg:col-span-2"
+              >
+                <ContactForm />
+              </motion.div>
             </div>
           </motion.div>
         </div>
