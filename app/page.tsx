@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -29,10 +29,30 @@ import { ContactForm } from "@/components/contact-form"
 
 export default function Portfolio() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const contactSectionRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll()
   const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
 
   const { theme, setTheme } = useTheme()
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!contactSectionRef.current) return
+
+      const rect = contactSectionRef.current.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+
+      setMousePosition({ x, y })
+    }
+
+    const contactSection = contactSectionRef.current
+    if (contactSection) {
+      contactSection.addEventListener("mousemove", handleMouseMove)
+      return () => contactSection.removeEventListener("mousemove", handleMouseMove)
+    }
+  }, [])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -237,6 +257,22 @@ export default function Portfolio() {
 
         <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <div className="mb-8 flex justify-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-400 to-teal-400 rounded-full blur-xl opacity-30" />
+                <img
+                  src="/headshot.jpg"
+                  alt="Muhammad Abdullah"
+                  className="relative w-40 h-40 sm:w-48 sm:h-48 rounded-full object-cover border-4 border-emerald-500 shadow-2xl"
+                />
+              </motion.div>
+            </div>
+
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6">
               Muhammad Abdullah
             </h1>
@@ -499,75 +535,150 @@ export default function Portfolio() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
+      <section
+        ref={contactSectionRef}
+        id="contact"
+        className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden"
+      >
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: `radial-gradient(circle 400px at ${mousePosition.x}px ${mousePosition.y}px, rgba(16, 185, 129, 0.15), transparent 80%)`,
+            transition: "background 0.1s ease-out",
+          }}
+        />
+
+        <div className="relative z-10 max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 text-center">Let's Work Together</h2>
-            <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto text-center">
-              I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your
-              ideas to life.
-            </p>
+            <div className="mb-16 text-center">
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6">Let's Work Together</h2>
+              <p className="text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your
+                ideas to life.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Left: contact info */}
-              <div className="space-y-6">
-                <Card className="bg-slate-800 border-slate-700 text-slate-200">
-                  <CardHeader>
-                    <CardTitle>Contact information</CardTitle>
-                  </CardHeader>
-                  <CardContent className="grid grid-cols-1 gap-6">
-                    <div className="flex items-start gap-3">
-                      <Mail className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Email</p>
-                        <p className="font-medium">muhammadabdullah101998@gmail.com</p>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Contact Info Cards - Left Side */}
+              <div className="lg:col-span-1 space-y-4">
+                {/* Email Card */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="bg-slate-800/50 border-slate-700 hover:border-emerald-500/50 hover:bg-slate-800/80 transition-all duration-300 backdrop-blur-sm">
+                    <CardContent className="pt-6">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                          <Mail className="text-emerald-400" size={24} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm text-slate-400 font-medium mb-1">Email</p>
+                          <a
+                            href="mailto:muhammadabdullah101998@gmail.com"
+                            className="text-white hover:text-emerald-400 transition-colors break-all"
+                          >
+                            muhammadabdullah101998@gmail.com
+                          </a>
+                        </div>
                       </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Phone className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Phone</p>
-                        <p className="font-medium">+92 312 7677525</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <MapPin className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Location</p>
-                        <p className="font-medium">Lahore, Pakistan</p>
-                      </div>
-                    </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
 
-                    <div className="flex gap-3">
-                      <Button
-                        size="sm"
-                        className="bg-emerald-600 hover:bg-emerald-700"
-                        onClick={() => window.open("mailto:muhammadabdullah101998@gmail.com")}
-                      >
-                        <Mail className="mr-2 h-4 w-4" />
-                        Send Email
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-slate-600 text-white hover:bg-slate-800 bg-transparent"
-                        onClick={() => window.open("https://www.linkedin.com/in/muhammadab98/", "_blank")}
-                      >
-                        <Linkedin className="mr-2 h-4 w-4" />
-                        LinkedIn
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                {/* Phone Card */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="bg-slate-800/50 border-slate-700 hover:border-emerald-500/50 hover:bg-slate-800/80 transition-all duration-300 backdrop-blur-sm">
+                    <CardContent className="pt-6">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                          <Phone className="text-emerald-400" size={24} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm text-slate-400 font-medium mb-1">Phone</p>
+                          <a href="tel:+923127677525" className="text-white hover:text-emerald-400 transition-colors">
+                            +92 312 7677525
+                          </a>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Location Card */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  viewport={{ once: true }}
+                >
+                  <Card className="bg-slate-800/50 border-slate-700 hover:border-emerald-500/50 hover:bg-slate-800/80 transition-all duration-300 backdrop-blur-sm">
+                    <CardContent className="pt-6">
+                      <div className="flex items-start gap-4">
+                        <div className="p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
+                          <MapPin className="text-emerald-400" size={24} />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm text-slate-400 font-medium mb-1">Location</p>
+                          <p className="text-white">Lahore, Pakistan</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                {/* Social Links */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  viewport={{ once: true }}
+                  className="pt-4"
+                >
+                  <div className="flex gap-3">
+                    <Button
+                      size="sm"
+                      className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white"
+                      onClick={() => window.open("mailto:muhammadabdullah101998@gmail.com")}
+                    >
+                      <Mail className="mr-2 h-4 w-4" />
+                      Email
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 border-slate-600 text-white hover:bg-slate-700 hover:text-white bg-transparent"
+                      onClick={() => window.open("https://www.linkedin.com/in/muhammadab98/", "_blank")}
+                    >
+                      <Linkedin className="mr-2 h-4 w-4" />
+                      LinkedIn
+                    </Button>
+                  </div>
+                </motion.div>
               </div>
 
-              {/* Right: form */}
-              <ContactForm />
+              {/* Contact Form - Right Side */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="lg:col-span-2"
+              >
+                <ContactForm />
+              </motion.div>
             </div>
           </motion.div>
         </div>
