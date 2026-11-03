@@ -11,6 +11,7 @@ import {
   Code2,
   Database,
   Github,
+  Instagram,
   Linkedin,
   Mail,
   MapPin,
@@ -116,7 +117,7 @@ export default function Portfolio() {
       <section id="top" className="container relative flex min-h-[calc(100vh-5rem)] items-center py-20 lg:py-28">
         <div className="hero-orb" />
         <motion.div className="hero-signal" animate={{ x: [0, 12, 0], y: [0, -10, 0], rotate: [0, 2, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
-          <img className="availability-photo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Polished%20Corporate%20Headshot%20with%20Warm%20Office%20Bokeh-FIM8t6NLQRUACHvQLjFB6JchFfRwn2.png" alt="Muhammad Abdullah in a navy suit" />
+          
           <div className="availability-copy"><span className="signal-ping" /><span>Available for ambitious builds</span><span className="signal-arrow">↗</span></div>
         </motion.div>
         <motion.div className="hero-float-card hero-float-card-top" animate={{ y: [0, -12, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
@@ -159,9 +160,9 @@ export default function Portfolio() {
 
       <section id="skills" className="section border-y border-border bg-card/50"><div className="container"><SectionHeading eyebrow="04 / Toolkit" title="The tools behind the work." /><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{skills.map(({ label, icon: Icon, items }) => <div key={label} className="skill-card"><Icon className="text-primary" size={22} /><h3 className="mt-5 font-semibold">{label}</h3><div className="mt-4 flex flex-wrap gap-2">{items.map((item) => <span key={item} className="skill-pill">{item}</span>)}</div></div>)}</div></div></section>
 
-      <section id="contact" className="section container"><div className="contact-panel"><div><p className="eyebrow">05 / Contact</p><h2 className="mt-5 max-w-xl text-4xl font-semibold tracking-tight sm:text-5xl">Have a difficult problem? Let’s make it shippable.</h2><p className="mt-6 max-w-lg text-muted-foreground">Open to Senior Software Engineer, Full-Stack, Applied AI, and Technical Lead opportunities.</p></div><div className="mt-10 space-y-4 lg:mt-0"><a className="contact-link" href="mailto:muhammadabdullah101998@gmail.com"><Mail size={18} />muhammadabdullah101998@gmail.com<ArrowUpRight size={16} /></a><a className="contact-link" href="https://calendly.com/muhammadabdullah101998/lets-talk" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} />Book a meeting<ArrowUpRight size={16} /></a><a className="contact-link" href="https://www.linkedin.com/in/muhammadab98" target="_blank" rel="noreferrer"><Linkedin size={18} />linkedin.com/in/muhammadab98<ArrowUpRight size={16} /></a></div></div></section>
+      <section id="contact" className="section container"><div className="contact-panel"><div><p className="eyebrow">05 / Contact</p><h2 className="mt-5 max-w-xl text-4xl font-semibold tracking-tight sm:text-5xl">Have a difficult problem? Let’s make it shippable.</h2><p className="mt-6 max-w-lg text-muted-foreground">Open to Senior Software Engineer, Full-Stack, Applied AI, and Technical Lead opportunities.</p></div><div className="mt-10 space-y-4 lg:mt-0"><a className="contact-link" href="mailto:muhammadabdullah101998@gmail.com"><Mail size={18} />muhammadabdullah101998@gmail.com<ArrowUpRight size={16} /></a><a className="contact-link" href="https://calendly.com/muhammadabdullah101998/lets-talk" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} />Book a meeting<ArrowUpRight size={16} /></a><a className="contact-link" href="https://www.linkedin.com/in/muhammadab98" target="_blank" rel="noreferrer"><Linkedin size={18} />linkedin.com/in/muhammadab98<ArrowUpRight size={16} /></a><a className="contact-link" href="https://instagram.com/muhammad.abdullah.38" target="_blank" rel="noreferrer"><Instagram size={18} />instagram.com/muhammad.abdullah.38<ArrowUpRight size={16} /></a></div></div></section>
 
-      <footer className="container flex flex-col gap-4 border-t border-border py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><p>© 2026 Muhammad Abdullah. Built with care.</p><div className="flex gap-4"><a href="mailto:muhammadabdullah101998@gmail.com" aria-label="Email"><Mail size={17} /></a><a href="https://www.linkedin.com/in/muhammadab98" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17} /></a><a href="https://github.com/mabdullah98" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17} /></a></div></footer>
+      <footer className="container flex flex-col gap-4 border-t border-border py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><p>© 2026 Muhammad Abdullah. Built with care.</p><div className="flex gap-4"><a href="mailto:muhammadabdullah101998@gmail.com" aria-label="Email"><Mail size={17} /></a><a href="https://www.linkedin.com/in/muhammadab98" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17} /></a><a href="https://github.com/mabdullah98" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17} /></a><a href="https://instagram.com/muhammad.abdullah.38" target="_blank" rel="noreferrer" aria-label="Instagram"><Instagram size={17} /></a></div></footer>
     </main>
   )
 }

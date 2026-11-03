@@ -90,7 +90,7 @@
 .grid-texture { background-image: linear-gradient(hsl(var(--foreground) / .035) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground) / .035) 1px, transparent 1px); background-size: 56px 56px; mask-image: linear-gradient(to bottom, black, transparent 75%); }
 .hero-orb { @apply pointer-events-none absolute right-[-12rem] top-1/4 h-[38rem] w-[38rem] rounded-full bg-primary/10 blur-3xl; animation: orb-drift 14s ease-in-out infinite; }
   .hero-signal { @apply absolute right-4 top-16 z-10 hidden overflow-hidden rounded-2xl border border-primary/35 bg-background/85 text-[10px] font-bold uppercase tracking-[.16em] text-primary shadow-xl shadow-primary/10 backdrop-blur-md sm:block lg:right-16 lg:top-24; }
-  .availability-photo { @apply block h-20 w-16 object-cover object-top; }
+
   .availability-copy { @apply flex items-center gap-2 px-3 py-2; }
 .signal-ping { @apply inline-block h-2 w-2 rounded-full bg-primary; animation: signal-pulse 1.8s ease-in-out infinite; }
 .signal-arrow { @apply ml-1 text-sm; }
