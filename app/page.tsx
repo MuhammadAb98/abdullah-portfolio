@@ -116,19 +116,14 @@ export default function Portfolio() {
       <section id="top" className="container relative flex min-h-[calc(100vh-5rem)] items-center py-20 lg:py-28">
         <div className="hero-orb" />
         <motion.div className="hero-signal" animate={{ x: [0, 12, 0], y: [0, -10, 0], rotate: [0, 2, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
-          <span className="signal-ping" />
-          <span>Available for ambitious builds</span>
-          <span className="signal-arrow">↗</span>
+          <img className="availability-photo" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Polished%20Corporate%20Headshot%20with%20Warm%20Office%20Bokeh-FIM8t6NLQRUACHvQLjFB6JchFfRwn2.png" alt="Muhammad Abdullah in a navy suit" />
+          <div className="availability-copy"><span className="signal-ping" /><span>Available for ambitious builds</span><span className="signal-arrow">↗</span></div>
         </motion.div>
         <motion.div className="hero-float-card hero-float-card-top" animate={{ y: [0, -12, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
           <span className="hero-float-label">LATEST SHIP</span><strong>AI workflow systems</strong>
         </motion.div>
         <motion.div className="hero-float-card hero-float-card-bottom" animate={{ y: [0, 10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: .6 }}>
           <span className="hero-float-label">SYSTEM HEALTH</span><strong><span className="signal-ping" /> 99.9% reliable</strong>
-        </motion.div>
-        <motion.div className="hero-photo" initial={{ opacity: 0, scale: .92, x: 24 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ delay: .18, duration: .8 }}>
-          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Polished%20Corporate%20Headshot%20with%20Warm%20Office%20Bokeh-FIM8t6NLQRUACHvQLjFB6JchFfRwn2.png" alt="Muhammad Abdullah in a navy suit" />
-          <div className="hero-photo-label"><span className="signal-ping" /> HUMAN + SYSTEMS</div>
         </motion.div>
         <motion.div className="hero-console" initial={{ opacity: 0, scale: .94, rotate: 3 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ delay: .35, duration: .8 }} aria-label="Live engineering system map">
           <div className="hero-console-top"><span><i className="signal-ping" /> LIVE SYSTEM MAP</span><span>v5.0.26</span></div>
