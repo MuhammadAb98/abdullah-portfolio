@@ -115,6 +115,17 @@ export default function Portfolio() {
 
       <section id="top" className="container relative flex min-h-[calc(100vh-5rem)] items-center py-20 lg:py-28">
         <div className="hero-orb" />
+        <motion.div className="hero-signal" animate={{ x: [0, 12, 0], y: [0, -10, 0], rotate: [0, 2, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}>
+          <span className="signal-ping" />
+          <span>Available for ambitious builds</span>
+          <span className="signal-arrow">↗</span>
+        </motion.div>
+        <motion.div className="hero-float-card hero-float-card-top" animate={{ y: [0, -12, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
+          <span className="hero-float-label">LATEST SHIP</span><strong>AI workflow systems</strong>
+        </motion.div>
+        <motion.div className="hero-float-card hero-float-card-bottom" animate={{ y: [0, 10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: .6 }}>
+          <span className="hero-float-label">SYSTEM HEALTH</span><strong><span className="signal-ping" /> 99.9% reliable</strong>
+        </motion.div>
         <div className="relative max-w-5xl">
           <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="eyebrow mb-6">Senior Software Engineer · Lahore, Pakistan</motion.p>
           <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .08 }} className="hero-title">Building software that <span>moves ideas forward.</span></motion.h1>
