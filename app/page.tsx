@@ -1,582 +1,140 @@
 "use client"
 
 import { useState } from "react"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Separator } from "@/components/ui/separator"
+import { motion } from "framer-motion"
 import {
-  Mail,
-  Phone,
-  MapPin,
-  Linkedin,
-  Code,
-  Database,
-  Cloud,
-  Wrench,
-  Brain,
-  Calendar,
-  Building,
+  ArrowUpRight,
+  BrainCircuit,
+  BriefcaseBusiness,
+  Check,
   ChevronDown,
+  Code2,
+  Database,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
   Menu,
-  X,
-  Sun,
   Moon,
+  Phone,
+  Server,
+  Sparkles,
+  Sun,
+  X,
 } from "lucide-react"
 import { useTheme } from "next-themes"
-import { ContactForm } from "@/components/contact-form"
+
+const navItems = ["about", "experience", "projects", "skills", "contact"]
+
+const skills = [
+  { label: "Frontend", icon: Code2, items: ["React.js", "Next.js", "TypeScript", "Angular", "Redux Toolkit", "Tailwind CSS"] },
+  { label: "Backend", icon: Server, items: ["Ruby on Rails", "Node.js", "NestJS", "REST APIs", "Microservices"] },
+  { label: "AI & Data", icon: BrainCircuit, items: ["OpenAI API", "RAG", "Vector databases", "Embedding models", "Conversational AI"] },
+  { label: "Cloud & DevOps", icon: Database, items: ["AWS Lambda", "S3", "CloudWatch", "CircleCI", "Jenkins", "Heroku", "Vercel"] },
+]
+
+const experience = [
+  {
+    company: "Focusteck",
+    role: "Senior Software Engineer",
+    period: "Jan 2026 — Present",
+    location: "Lahore, Pakistan",
+    current: true,
+    points: [
+      "Delivered 4+ customer-facing features and enhancements, contributing to on-time product releases.",
+      "Improved application performance by 20% through API, database, and query optimization.",
+      "Resolved 10+ production issues and customer defects using AWS CloudWatch, Kibana, and application logs.",
+      "Conducted 70+ code reviews and mentored junior developers to raise engineering standards.",
+    ],
+  },
+  {
+    company: "Clustox",
+    role: "Senior Software Engineer",
+    period: "Apr 2025 — Dec 2025",
+    location: "Lahore, Pakistan",
+    points: [
+      "Reduced page load times by 40% through SSR, API optimization, lazy loading, and caching strategies.",
+      "Integrated RAG-based AI solutions for context-aware document retrieval in production environments.",
+      "Architected reusable UI components and frontend standards across client projects.",
+      "Delivered full-stack features for an NYC-based client using React, TypeScript, Next.js, and Rails.",
+    ],
+  },
+  {
+    company: "Clustox",
+    role: "Software Engineer",
+    period: "Feb 2022 — Mar 2025",
+    location: "Lahore, Pakistan",
+    points: [
+      "Modernized codebases with React, TypeScript, Next.js, Rails, and RESTful APIs.",
+      "Built features, wrote RSpec tests, reviewed pull requests, and supported production stability.",
+      "Led client syncs, product demos, and Scrum planning in a staff augmentation model.",
+    ],
+  },
+  {
+    company: "Greelogix",
+    role: "Associate Software Engineer",
+    period: "Aug 2021 — Feb 2022",
+    location: "Lahore, Pakistan",
+    points: ["Contributed to production applications across development, debugging, testing, and maintenance.", "Collaborated with senior engineers to ship features and resolve defects in an Agile environment."],
+  },
+]
+
+const projects = [
+  { name: "Ideawake", type: "Idea management SaaS", description: "A configurable platform for capturing, evaluating, and acting on ideas across an organization.", stack: "Angular · NestJS · AWS · DynamoDB", result: "Built scalable multi-tenant services, async jobs, and microservices while resolving critical real-time connectivity issues." },
+  { name: "Urban Assembly — NYC", type: "EdTech platform · 3,000+ users", description: "Student data management, academic tracking, and Social-Emotional Learning for educational institutions.", stack: "React · Rails 7 · PostgreSQL · AWS", result: "Reduced load times by 30% and delivered AI-powered learning tools, reporting APIs, and personalized content experiences." },
+  { name: "ALLBCI", type: "Research collaboration platform", description: "A hub for hosting, publishing, and collaboratively reviewing research papers privately or openly.", stack: "Supabase · Vector search · React", result: "Improved loading speed by 15%, launched thumbnail previews and vector search, and shipped document sharing." },
+  { name: "Konnekt", type: "Bug & issue tracking", description: "Task, requirements, and issue management for product teams.", stack: "React 18 · TypeScript · Redux Saga · Lexical", result: "Built modular lazy-loaded interfaces and integrated Meta’s Lexical editor for rich-text workflows." },
+  { name: "GuardsPur", type: "Security operations dashboard", description: "A single dashboard for security company operations and field verification.", stack: "React · Google Maps API · Redux Toolkit", result: "Delivered real-time location tracking, QR verification, and a responsive mobile-first experience." },
+]
+
+function SectionHeading({ eyebrow, title, children }: { eyebrow: string; title: string; children?: React.ReactNode }) {
+  return <div className="mb-12 flex flex-col gap-4 md:flex-row md:items-end md:justify-between"><div><p className="eyebrow">{eyebrow}</p><h2 className="section-title">{title}</h2></div>{children}</div>
+}
 
 export default function Portfolio() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const { scrollYProgress } = useScroll()
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"])
-
+  const [menuOpen, setMenuOpen] = useState(false)
   const { theme, setTheme } = useTheme()
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-    setIsMenuOpen(false)
-  }
-
-  const skills = {
-    "Programming Languages": ["JavaScript", "TypeScript", "Ruby"],
-    Frontend: ["React.js", "Next.js", "Redux Saga", "Context API", "Tailwind CSS", "Ant Design"],
-    Backend: ["Ruby on Rails", "RESTful APIs", "Node.js"],
-    Databases: ["MySQL", "PostgreSQL", "Supabase"],
-    "Cloud & DevOps": ["AWS", "Heroku", "CircleCI", "Vercel"],
-    Testing: ["Jest", "RSpec", "Capybara"],
-    "AI Integration": ["ChatGPT", "RAG", "AI-driven personalization"],
-    Tools: ["Git", "Jira", "Webpack", "Chart.js", "Lodash"],
-  }
-
-  const experience = [
-    {
-      company: "Clustox",
-      location: "Lahore, Pakistan",
-      positions: [
-        {
-          title: "Senior Software Engineer",
-          period: "April 2025 - Present",
-          achievements: [
-            "Led frontend initiatives, refactored complex modules using Next.js and TypeScript for improved performance and scalability",
-            "Designed reusable UI components and implemented frontend architecture best practices, reducing tech debt across multiple projects",
-            "Integrated advanced AI-based solutions using AI Models and Retrieval-Augmented Generation (RAG) to enhance user experience",
-            "Enhanced customer-facing web application with React and Next.js, reducing load times by 40% through SSR, API optimization, lazy loading, and caching",
-          ],
-        },
-        {
-          title: "Software Engineer",
-          period: "July 2022 - March 2025",
-          achievements: [
-            "Contributed to all phases of the software development lifecycle, including design, code reviews, testing, and deployment",
-            "Developed scalable front-end solutions using Flexbox, CSS Grids, Ant Design, and Redux Saga",
-            "Integrated Ruby on Rails-based RESTful APIs and collaborated with senior developers on complex tasks",
-          ],
-        },
-        {
-          title: "Associate Software Engineer",
-          period: "Feb 2022 - July 2022",
-          achievements: [
-            "Gained hands-on experience in software development, debugging, and testing while contributing to live projects",
-            "Collaborated with senior developers to enhance technical proficiency and industry best practices",
-          ],
-        },
-      ],
-    },
-    {
-      company: "Greelogix",
-      location: "Lahore, Pakistan",
-      positions: [
-        {
-          title: "Associate Software Engineer",
-          period: "Aug 2021 – Feb 2022",
-          achievements: [
-            "Gained foundational experience in software development and testing",
-            "Worked on live projects under senior developer guidance",
-          ],
-        },
-      ],
-    },
-  ]
-
-  const projects = [
-    {
-      title: "Urban Assembly - NYC",
-      description:
-        "A platform with 3000+ users, designed to enhance student data management, academic tracking, and Social-Emotional Learning (SEL) for educational institutions",
-      technologies: ["React.js", "Rails 7", "PostgreSQL", "Ant Design", "Chart.js", "AWS", "CircleCI"],
-      achievements: [
-        "Improved platform responsiveness and reduced load times by 30%",
-        "Developed AI-powered learning tools and programs to improve student growth",
-        "Designed and integrated RESTful APIs with Ruby on Rails",
-        "Automated deployment pipelines with CircleCI, AWS, and Heroku",
-      ],
-    },
-    {
-      title: "Konnekt – Bug & Issue Tracking Tool",
-      description: "Developed a comprehensive tool for bug and issue tracking with task and requirements management",
-      technologies: ["React 18", "TypeScript", "Tailwind CSS", "Ant Design", "Redux Saga", "Jest"],
-      achievements: [
-        "Designed scalable front-end features delivering seamless, modern user experiences",
-        "Built optimized modular components with lazy loading and React animations",
-        "Implemented Lexical Editor by Meta for rich-text editing",
-        "Developed REST APIs with SSO for secure authentication",
-      ],
-    },
-    {
-      title: "OECD Platform",
-      description: "Platform promoting international comparative research, innovation, and key indicators in education",
-      technologies: ["React", "AWS", "Performance Optimization"],
-      achievements: [
-        "Improved application performance by transitioning class components to React hooks",
-        "Managed AWS services, deployments, and resource optimization",
-        "Ensured timely project delivery by coordinating with team and meeting deadlines",
-      ],
-    },
-    {
-      title: "ALLBCI - The Complete BCI Hub",
-      description: "Remote contract project for hosting, publishing, and collaboratively reviewing research papers",
-      technologies: ["Supabase", "Vector Search", "Performance Optimization"],
-      achievements: [
-        "Achieved 15% improvement in application loading speed",
-        "Successfully launched thumbnail and vector search feature",
-        "Resolved major Supabase migration errors blocking production deployment",
-        "Built robust document sharing feature boosting user engagement",
-      ],
-    },
-    {
-      title: "GuardsPur",
-      description: "Simplified security company operations by consolidating tasks into one dashboard",
-      technologies: ["React", "Google Maps API", "Redux Toolkit", "Mobile-First Design"],
-      achievements: [
-        "Developed mobile-friendly design with real-time tracking",
-        "Managed asynchronous actions with Redux toolkit",
-        "Implemented responsive dashboard for security operations",
-      ],
-    },
-  ]
+  const scrollTo = (id: string) => { document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }); setMenuOpen(false) }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              className="font-bold text-xl text-slate-800 dark:text-white"
-            >
-              Muhammad Abdullah
-            </motion.div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex space-x-8">
-              {["about", "skills", "experience", "projects", "education", "contact"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item)}
-                  className="text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white capitalize transition-colors"
-                >
-                  {item}
-                </button>
-              ))}
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="p-2 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-                aria-label="Toggle theme"
-              >
-                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-              </button>
-            </div>
-
-            {/* Mobile Navigation Toggle */}
-            <button className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
-
-          {/* Mobile Navigation Menu */}
-          {isMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="md:hidden py-4 space-y-2"
-            >
-              {["about", "skills", "experience", "projects", "education", "contact"].map((item) => (
-                <button
-                  key={item}
-                  onClick={() => scrollToSection(item)}
-                  className="block w-full text-left px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white capitalize transition-colors"
-                >
-                  {item}
-                </button>
-              ))}
-              <button
-                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                className="flex items-center gap-2 w-full text-left px-4 py-2 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
-              >
-                {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
-                {theme === "dark" ? "Light Mode" : "Dark Mode"}
-              </button>
-            </motion.div>
-          )}
+    <main className="min-h-screen overflow-hidden bg-background text-foreground">
+      <div className="grid-texture pointer-events-none fixed inset-0 -z-10" />
+      <header className="site-header">
+        <div className="container flex h-20 items-center justify-between">
+          <button onClick={() => scrollTo("top")} className="flex items-center gap-3 text-left" aria-label="Back to top">
+            <span className="brand-mark">MA</span><span className="hidden text-sm font-semibold tracking-wide sm:block">Muhammad Abdullah</span>
+          </button>
+          <nav className="hidden items-center gap-7 md:flex" aria-label="Main navigation">
+            {navItems.map((item) => <button key={item} onClick={() => scrollTo(item)} className="nav-link">{item}</button>)}
+            <button className="theme-button" onClick={() => setTheme(theme === "dark" ? "light" : "dark")} aria-label="Toggle color theme">{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}</button>
+          </nav>
+          <button className="theme-button md:hidden" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Close menu" : "Open menu"}>{menuOpen ? <X size={20} /> : <Menu size={20} />}</button>
         </div>
-      </nav>
+        {menuOpen && <div className="container border-t border-border pb-5 pt-4 md:hidden"><div className="flex flex-col gap-4">{navItems.map((item) => <button key={item} onClick={() => scrollTo(item)} className="nav-link text-left">{item}</button>)}<button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="nav-link flex items-center gap-2 text-left">{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />} toggle theme</button></div></div>}
+      </header>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <motion.div
-          style={{ y }}
-          className="absolute inset-0 bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-950/20 dark:to-teal-950/20 opacity-50"
-        />
-
-        <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white mb-6">
-              Muhammad Abdullah
-            </h1>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl text-slate-600 dark:text-slate-300 mb-8">
-              Senior Software Engineer
-            </h2>
-            <p className="text-lg text-slate-600 dark:text-slate-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Results-driven Senior Software Engineer with 5 years of experience in building scalable, high-performance
-              web applications. Proficient in React.js, Next.js, TypeScript, and the MERN stack.
-            </p>
-
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
-              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                <MapPin size={18} />
-                <span>Lahore, Pakistan</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                <Phone size={18} />
-                <span>+92 312 7677525</span>
-              </div>
-              <div className="flex items-center gap-2 text-slate-600 dark:text-slate-300">
-                <Mail size={18} />
-                <span>muhammadabdullah101998@gmail.com</span>
-              </div>
-            </div>
-
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button
-                onClick={() => scrollToSection("projects")}
-                size="lg"
-                className="bg-emerald-600 hover:bg-emerald-700"
-              >
-                View My Work
-              </Button>
-              <Button onClick={() => scrollToSection("contact")} variant="outline" size="lg">
-                Get In Touch
-              </Button>
-            </div>
-          </motion.div>
-        </div>
-
-        <motion.div
-          animate={{ y: [0, -10, 0] }}
-          transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <ChevronDown size={32} className="text-slate-400" />
-        </motion.div>
-      </section>
-
-      {/* About Section */}
-      <section id="about" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-8 text-center">
-              Professional Summary
-            </h2>
-            <Card className="p-8">
-              <CardContent className="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed">
-                <p>
-                  Results-driven Senior Software Engineer with 5 years of experience in building scalable,
-                  high-performance web applications. Proficient in React.js, Next.js, TypeScript, and the MERN stack,
-                  with strong backend expertise in Ruby on Rails and RESTful APIs.
-                </p>
-                <p>
-                  Adept at integrating AI tools like ChatGPT, managing cloud infrastructure on AWS, and delivering
-                  robust solutions through CI/CD pipelines (CircleCI, Heroku). Demonstrated success in client-facing
-                  roles, remote teams, and staff augmentation environment, with a strong focus on product quality,
-                  performance, and delivery.
-                </p>
-              </CardContent>
-            </Card>
-          </motion.div>
+      <section id="top" className="container relative flex min-h-[calc(100vh-5rem)] items-center py-20 lg:py-28">
+        <div className="hero-orb" />
+        <div className="relative max-w-5xl">
+          <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="eyebrow mb-6">Senior Software Engineer · Lahore, Pakistan</motion.p>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .08 }} className="hero-title">Building software that <span>moves ideas forward.</span></motion.h1>
+          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .16 }} className="hero-copy">I’m Muhammad Abdullah — a full-stack and agentic AI engineer with 5+ years of experience turning complex product requirements into secure, production-ready systems.</motion.p>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .24 }} className="mt-9 flex flex-wrap gap-4"><button onClick={() => scrollTo("projects")} className="button-primary">Explore my work <ArrowUpRight size={17} /></button><button onClick={() => scrollTo("contact")} className="button-secondary">Let’s work together</button></motion.div>
+          <div className="mt-16 grid max-w-2xl grid-cols-2 gap-8 border-t border-border pt-6 sm:grid-cols-4"><div><strong className="stat-number">5+</strong><span className="stat-label">years building</span></div><div><strong className="stat-number">40%</strong><span className="stat-label">faster page loads</span></div><div><strong className="stat-number">70+</strong><span className="stat-label">code reviews</span></div><div><strong className="stat-number">20%</strong><span className="stat-label">performance gains</span></div></div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-12 text-center">
-              Technical Skills
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Object.entries(skills).map(([category, skillList], index) => (
-                <motion.div
-                  key={category}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="h-full">
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2 text-lg text-slate-900 dark:text-white">
-                        {category === "Programming Languages" && <Code size={20} />}
-                        {category === "Databases" && <Database size={20} />}
-                        {category === "Cloud & DevOps" && <Cloud size={20} />}
-                        {category === "AI Integration" && <Brain size={20} />}
-                        {!["Programming Languages", "Databases", "Cloud & DevOps", "AI Integration"].includes(
-                          category,
-                        ) && <Wrench size={20} />}
-                        {category}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2">
-                        {skillList.map((skill) => (
-                          <Badge key={skill} variant="secondary" className="text-xs">
-                            {skill}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <section id="about" className="section container"><SectionHeading eyebrow="01 / About" title="Engineering with context." /><div className="grid gap-10 lg:grid-cols-[1.1fr_.9fr]"><div className="prose-custom"><p>I’m a Senior Software Engineer focused on full-stack product engineering — from architecture and implementation through testing, deployment, optimization, and production support.</p><p>I work AI-first across the SDLC, using modern tools to move faster while keeping reliability, security, and maintainability at the center. My experience spans EdTech, research, security, and data-driven SaaS products.</p><p>I enjoy client-facing teams, staff augmentation environments, and collaborating with engineers and product leaders across time zones.</p></div><div className="quote-card"><Sparkles className="mb-8 text-primary" size={22} /><p>“Strong software engineering fundamentals matter just as much as adopting new technology.”</p><span>— A principle I bring to every build</span></div></div></section>
 
-      {/* Experience Section */}
-      <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-12 text-center">
-              Work Experience
-            </h2>
-            <div className="space-y-8">
-              {experience.map((company, companyIndex) => (
-                <motion.div
-                  key={company.company}
-                  initial={{ opacity: 0, x: -30 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: companyIndex * 0.2 }}
-                  viewport={{ once: true }}
-                >
-                  <Card>
-                    <CardHeader>
-                      <div className="flex items-center gap-3 mb-4">
-                        <Building className="text-emerald-600" size={24} />
-                        <div>
-                          <CardTitle className="text-xl text-slate-900 dark:text-white">{company.company}</CardTitle>
-                          <CardDescription className="flex items-center gap-1 text-slate-600 dark:text-slate-300">
-                            <MapPin size={14} />
-                            {company.location}
-                          </CardDescription>
-                        </div>
-                      </div>
-                    </CardHeader>
-                    <CardContent className="space-y-6">
-                      {company.positions.map((position, positionIndex) => (
-                        <div key={positionIndex}>
-                          <div className="flex items-center gap-2 mb-3">
-                            <Calendar size={16} className="text-slate-500" />
-                            <h4 className="font-semibold text-slate-900 dark:text-white">{position.title}</h4>
-                            <span className="text-sm text-slate-500">({position.period})</span>
-                          </div>
-                          <ul className="space-y-2 ml-6">
-                            {position.achievements.map((achievement, achievementIndex) => (
-                              <li
-                                key={achievementIndex}
-                                className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed"
-                              >
-                                • {achievement}
-                              </li>
-                            ))}
-                          </ul>
-                          {positionIndex < company.positions.length - 1 && <Separator className="mt-4" />}
-                        </div>
-                      ))}
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <section id="experience" className="section border-y border-border bg-card/50"><div className="container"><SectionHeading eyebrow="02 / Experience" title="A track record of shipping." /><div className="timeline">{experience.map((item, index) => <motion.article key={`${item.company}-${item.role}`} initial={{ opacity: 0, x: -15 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: index * .07 }} className="timeline-item"><div className="timeline-marker">{item.current ? <span className="pulse-dot" /> : <span />}</div><div className="timeline-content"><div className="mb-2 flex flex-wrap items-baseline justify-between gap-2"><h3 className="text-xl font-semibold tracking-tight">{item.role}</h3><span className="period">{item.period}</span></div><p className="company-line">{item.company} <span>· {item.location}</span></p><ul className="mt-5 space-y-3">{item.points.map((point) => <li key={point} className="flex gap-3 text-muted-foreground"><Check className="mt-1 shrink-0 text-primary" size={15} />{point}</li>)}</ul></div></motion.article>)}</div></div></section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-20 px-4 sm:px-6 lg:px-8 bg-white dark:bg-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white mb-12 text-center">
-              Featured Projects
-            </h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {projects.map((project, index) => (
-                <motion.div
-                  key={project.title}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                >
-                  <Card className="h-full hover:shadow-lg transition-shadow">
-                    <CardHeader>
-                      <CardTitle className="text-lg font-semibold text-slate-900 dark:text-white">
-                        {project.title}
-                      </CardTitle>
-                      <CardDescription className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">
-                        {project.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div>
-                        <h5 className="font-semibold text-sm mb-2 text-slate-900 dark:text-white">
-                          Technologies Used:
-                        </h5>
-                        <div className="flex flex-wrap gap-1">
-                          {project.technologies.map((tech) => (
-                            <Badge key={tech} variant="outline" className="text-xs">
-                              {tech}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                      <div>
-                        <h5 className="font-semibold text-sm mb-2 text-slate-900 dark:text-white">Key Achievements:</h5>
-                        <ul className="space-y-1">
-                          {project.achievements.map((achievement, achievementIndex) => (
-                            <li
-                              key={achievementIndex}
-                              className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed"
-                            >
-                              • {achievement}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <section id="projects" className="section container"><SectionHeading eyebrow="03 / Selected work" title="Systems with a point of view." /><div className="grid gap-5 md:grid-cols-2">{projects.map((project, index) => <motion.article key={project.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * .06 }} className="project-card"><div className="flex items-start justify-between gap-4"><div><p className="project-type">{project.type}</p><h3 className="mt-2 text-2xl font-semibold tracking-tight">{project.name}</h3></div><span className="project-index">0{index + 1}</span></div><p className="mt-5 text-muted-foreground">{project.description}</p><p className="mt-5 text-xs font-semibold uppercase tracking-[.14em] text-primary">{project.stack}</p><div className="mt-6 border-t border-border pt-4 text-sm leading-relaxed text-muted-foreground"><span className="font-semibold text-foreground">Impact — </span>{project.result}</div></motion.article>)}</div></section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 sm:px-6 lg:px-8 bg-slate-900">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 text-center">Let's Work Together</h2>
-            <p className="text-xl text-slate-300 mb-12 max-w-2xl mx-auto text-center">
-              I'm always interested in new opportunities and exciting projects. Let's discuss how we can bring your
-              ideas to life.
-            </p>
+      <section id="skills" className="section border-y border-border bg-card/50"><div className="container"><SectionHeading eyebrow="04 / Toolkit" title="The tools behind the work." /><div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{skills.map(({ label, icon: Icon, items }) => <div key={label} className="skill-card"><Icon className="text-primary" size={22} /><h3 className="mt-5 font-semibold">{label}</h3><div className="mt-4 flex flex-wrap gap-2">{items.map((item) => <span key={item} className="skill-pill">{item}</span>)}</div></div>)}</div></div></section>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Left: contact info */}
-              <div className="space-y-6">
-                <Card className="bg-slate-800 border-slate-700 text-slate-200">
-                  <CardHeader>
-                    <CardTitle>Contact information</CardTitle>
-                  </CardHeader>
-                  <CardContent className="grid grid-cols-1 gap-6">
-                    <div className="flex items-start gap-3">
-                      <Mail className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Email</p>
-                        <p className="font-medium">muhammadabdullah101998@gmail.com</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Phone className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Phone</p>
-                        <p className="font-medium">+92 312 7677525</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <MapPin className="text-emerald-400 mt-1" size={20} />
-                      <div>
-                        <p className="text-sm text-slate-400">Location</p>
-                        <p className="font-medium">Lahore, Pakistan</p>
-                      </div>
-                    </div>
+      <section id="contact" className="section container"><div className="contact-panel"><div><p className="eyebrow">05 / Contact</p><h2 className="mt-5 max-w-xl text-4xl font-semibold tracking-tight sm:text-5xl">Have a difficult problem? Let’s make it shippable.</h2><p className="mt-6 max-w-lg text-muted-foreground">Open to Senior Software Engineer, Full-Stack, Applied AI, and Technical Lead opportunities.</p></div><div className="mt-10 space-y-4 lg:mt-0"><a className="contact-link" href="mailto:muhammadabdullah101998@gmail.com"><Mail size={18} />muhammadabdullah101998@gmail.com<ArrowUpRight size={16} /></a><a className="contact-link" href="https://calendly.com/muhammadabdullah101998/lets-talk" target="_blank" rel="noreferrer"><BriefcaseBusiness size={18} />Book a meeting<ArrowUpRight size={16} /></a><a className="contact-link" href="https://www.linkedin.com/in/muhammadab98" target="_blank" rel="noreferrer"><Linkedin size={18} />linkedin.com/in/muhammadab98<ArrowUpRight size={16} /></a></div></div></section>
 
-                    <div className="flex gap-3">
-                      <Button
-                        size="sm"
-                        className="bg-emerald-600 hover:bg-emerald-700"
-                        onClick={() => window.open("mailto:muhammadabdullah101998@gmail.com")}
-                      >
-                        <Mail className="mr-2 h-4 w-4" />
-                        Send Email
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="border-slate-600 text-white hover:bg-slate-800 bg-transparent"
-                        onClick={() => window.open("https://www.linkedin.com/in/muhammadab98/", "_blank")}
-                      >
-                        <Linkedin className="mr-2 h-4 w-4" />
-                        LinkedIn
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Right: form */}
-              <ContactForm />
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 px-4 sm:px-6 lg:px-8 bg-slate-800 text-slate-400 text-center">
-        <p>&copy; 2025 Muhammad Abdullah. All rights reserved.</p>
-      </footer>
-    </div>
+      <footer className="container flex flex-col gap-4 border-t border-border py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"><p>© {new Date().getFullYear()} Muhammad Abdullah. Built with care.</p><div className="flex gap-4"><a href="mailto:muhammadabdullah101998@gmail.com" aria-label="Email"><Mail size={17} /></a><a href="https://www.linkedin.com/in/muhammadab98" target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin size={17} /></a><a href="https://github.com/mabdullah98" target="_blank" rel="noreferrer" aria-label="GitHub"><Github size={17} /></a></div></footer>
+    </main>
   )
 }

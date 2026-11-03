@@ -8,10 +8,10 @@ import Script from "next/script"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Muhammad Abdullah - Senior Software Engineer",
+  title: "Muhammad Abdullah | Senior Software Engineer",
   description:
-    "Portfolio of Muhammad Abdullah, a Senior Software Engineer with 5 years of experience in React.js, Next.js, TypeScript, and Ruby on Rails.",
-    generator: 'v0.app'
+    "Muhammad Abdullah is a Senior Software Engineer building secure, production-ready full-stack and AI-enabled SaaS systems.",
+  generator: "v0.app"
 }
 
 export default function RootLayout({
