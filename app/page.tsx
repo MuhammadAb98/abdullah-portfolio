@@ -126,9 +126,20 @@ export default function Portfolio() {
         <motion.div className="hero-float-card hero-float-card-bottom" animate={{ y: [0, 10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: .6 }}>
           <span className="hero-float-label">SYSTEM HEALTH</span><strong><span className="signal-ping" /> 99.9% reliable</strong>
         </motion.div>
+        <motion.div className="hero-console" initial={{ opacity: 0, scale: .94, rotate: 3 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ delay: .35, duration: .8 }} aria-label="Live engineering system map">
+          <div className="hero-console-top"><span><i className="signal-ping" /> LIVE SYSTEM MAP</span><span>v5.0.26</span></div>
+          <div className="system-map">
+            <span className="map-line map-line-one" /><span className="map-line map-line-two" /><span className="map-line map-line-three" />
+            <motion.div className="map-node map-node-core" animate={{ scale: [1, 1.08, 1] }} transition={{ duration: 2.5, repeat: Infinity }}>MA</motion.div>
+            <motion.div className="map-node map-node-api" animate={{ y: [0, -7, 0] }} transition={{ duration: 3, repeat: Infinity }}>API</motion.div>
+            <motion.div className="map-node map-node-ai" animate={{ y: [0, 7, 0] }} transition={{ duration: 3.4, repeat: Infinity, delay: .3 }}>AI</motion.div>
+            <motion.div className="map-node map-node-data" animate={{ x: [0, 5, 0] }} transition={{ duration: 2.8, repeat: Infinity, delay: .5 }}>DB</motion.div>
+          </div>
+          <div className="hero-console-footer"><span>PRODUCT ENGINEERING</span><span>● ALL SYSTEMS GO</span></div>
+        </motion.div>
         <div className="relative max-w-5xl">
           <motion.p initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} className="eyebrow mb-6">Senior Software Engineer · Lahore, Pakistan</motion.p>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .08 }} className="hero-title">Building software that <span>moves ideas forward.</span></motion.h1>
+          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .08 }} className="hero-title max-w-[680px]">Building software that <span>moves ideas forward.</span></motion.h1>
           <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .16 }} className="hero-copy">I’m Muhammad Abdullah — a full-stack and agentic AI engineer with 5+ years of experience turning complex product requirements into secure, production-ready systems.</motion.p>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: .24 }} className="mt-9 flex flex-wrap gap-4"><button onClick={() => scrollTo("projects")} className="button-primary">Explore my work <ArrowUpRight size={17} /></button><button onClick={() => scrollTo("contact")} className="button-secondary">Let’s work together</button></motion.div>
           <div className="mt-16 grid max-w-2xl grid-cols-2 gap-8 border-t border-border pt-6 sm:grid-cols-4"><div><strong className="stat-number">5+</strong><span className="stat-label">years building</span></div><div><strong className="stat-number">40%</strong><span className="stat-label">faster page loads</span></div><div><strong className="stat-number">70+</strong><span className="stat-label">code reviews</span></div><div><strong className="stat-number">20%</strong><span className="stat-label">performance gains</span></div></div>
