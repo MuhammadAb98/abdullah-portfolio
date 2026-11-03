@@ -4,24 +4,24 @@
 
 @layer base {
   :root {
-    --background: 42 33% 97%;
-    --foreground: 222 35% 12%;
-    --card: 40 33% 99%;
-    --card-foreground: 222 35% 12%;
-    --popover: 40 33% 99%;
-    --popover-foreground: 222 35% 12%;
-    --primary: 205 82% 42%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 37 25% 92%;
-    --secondary-foreground: 222 35% 12%;
-    --muted: 37 25% 92%;
-    --muted-foreground: 218 15% 43%;
-    --accent: 37 25% 92%;
-    --accent-foreground: 222 35% 12%;
-    --border: 36 18% 86%;
-    --input: 36 18% 86%;
-    --ring: 205 82% 42%;
-    --radius: 0.75rem;
+    --background: 234 33% 8%;
+    --foreground: 48 100% 96%;
+    --card: 234 28% 12%;
+    --card-foreground: 48 100% 96%;
+    --popover: 234 28% 12%;
+    --popover-foreground: 48 100% 96%;
+    --primary: 66 100% 62%;
+    --primary-foreground: 234 33% 8%;
+    --secondary: 234 22% 18%;
+    --secondary-foreground: 48 100% 96%;
+    --muted: 234 22% 18%;
+    --muted-foreground: 230 16% 68%;
+    --accent: 274 82% 68%;
+    --accent-foreground: 234 33% 8%;
+    --border: 234 17% 25%;
+    --input: 234 17% 25%;
+    --ring: 66 100% 62%;
+    --radius: 0.35rem;
   }
   .dark {
     --background: 222 35% 9%;
@@ -44,7 +44,8 @@
   }
   * { @apply border-border; }
   html { scroll-behavior: smooth; }
-  body { @apply bg-background text-foreground; font-feature-settings: "ss01"; }
+  body { @apply bg-background text-foreground; font-feature-settings: "ss01"; background-image: radial-gradient(circle at 12% 8%, hsl(var(--primary) / .08), transparent 25rem), radial-gradient(circle at 88% 22%, hsl(var(--accent) / .10), transparent 28rem); }
+  ::selection { background: hsl(var(--primary)); color: hsl(var(--primary-foreground)); }
 }
 
 @layer components {
