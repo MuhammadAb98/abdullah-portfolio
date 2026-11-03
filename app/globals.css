@@ -100,6 +100,12 @@
 @keyframes orb-drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-20px, 16px, 0) scale(1.06); } }
 @keyframes signal-pulse { 0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / .35); } 50% { box-shadow: 0 0 0 5px hsl(var(--primary) / 0); } }
 @media (prefers-reduced-motion: reduce) { .hero-orb, .signal-ping { animation: none; } }
+.signal-rail { overflow: hidden; border-block: 1px solid hsl(var(--border)); background: hsl(var(--foreground)); color: hsl(var(--background)); transform: rotate(-1.25deg) scale(1.03); }
+.signal-rail-track { display: flex; width: max-content; gap: 2.5rem; padding: .95rem 0; animation: rail-scroll 28s linear infinite; }
+.signal-rail-track span { display: inline-flex; align-items: center; gap: 1rem; white-space: nowrap; font-size: .7rem; font-weight: 800; letter-spacing: .2em; }
+.signal-rail-track i { display: block; width: .45rem; height: .45rem; border-radius: 999px; background: hsl(var(--primary)); box-shadow: 0 0 1rem hsl(var(--primary)); }
+@keyframes rail-scroll { from { transform: translateX(0); } to { transform: translateX(-35%); } }
+@media (prefers-reduced-motion: reduce) { .signal-rail-track { animation-play-state: paused; } }
 ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: hsl(var(--background)); }
 ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 999px; }
