@@ -100,6 +100,10 @@
 @keyframes orb-drift { 0%, 100% { transform: translate3d(0, 0, 0) scale(1); } 50% { transform: translate3d(-20px, 16px, 0) scale(1.06); } }
 @keyframes signal-pulse { 0%, 100% { box-shadow: 0 0 0 0 hsl(var(--primary) / .35); } 50% { box-shadow: 0 0 0 5px hsl(var(--primary) / 0); } }
 @media (prefers-reduced-motion: reduce) { .hero-orb, .signal-ping { animation: none; } }
+  .hero-photo { position: absolute; right: 5%; top: 7%; z-index: 3; width: clamp(130px, 14vw, 180px); aspect-ratio: 3 / 4; overflow: hidden; border: 1px solid hsl(var(--primary) / .55); border-radius: 1.5rem; background: hsl(var(--card)); box-shadow: 18px 18px 0 hsl(var(--primary) / .12), 0 24px 60px hsl(220 40% 5% / .35); transform: rotate(5deg); }
+  .hero-photo::after { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 45%, hsl(220 40% 5% / .8)); content: ""; }
+  .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .hero-photo-label { position: absolute; right: .75rem; bottom: .75rem; left: .75rem; z-index: 1; display: flex; align-items: center; gap: .45rem; color: white; font-size: .58rem; font-weight: 700; letter-spacing: .13em; }
   .hero-console { position: absolute; right: 4%; top: 18%; z-index: 2; width: min(360px, 34vw); overflow: hidden; border: 1px solid hsl(var(--border)); border-radius: 18px; background: hsl(var(--card) / .78); box-shadow: 0 24px 80px hsl(var(--foreground) / .12); backdrop-filter: blur(18px); }
   .hero-console-top, .hero-console-footer { display: flex; justify-content: space-between; padding: 13px 16px; color: hsl(var(--muted-foreground)); font-size: 9px; font-weight: 700; letter-spacing: .14em; }
   .hero-console-top { border-bottom: 1px solid hsl(var(--border)); }
@@ -118,7 +122,7 @@
 .signal-rail-track i { display: block; width: .45rem; height: .45rem; border-radius: 999px; background: hsl(var(--primary)); box-shadow: 0 0 1rem hsl(var(--primary)); }
 @keyframes rail-scroll { from { transform: translateX(0); } to { transform: translateX(-35%); } }
 @media (prefers-reduced-motion: reduce) { .signal-rail-track { animation-play-state: paused; } }
-  @media (max-width: 900px) { .hero-console { display: none; } }
+  @media (max-width: 900px) { .hero-console, .hero-photo { display: none; } }
   ::-webkit-scrollbar { width: 8px; }
 ::-webkit-scrollbar-track { background: hsl(var(--background)); }
 ::-webkit-scrollbar-thumb { background: hsl(var(--border)); border-radius: 999px; }

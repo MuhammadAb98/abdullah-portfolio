@@ -126,6 +126,10 @@ export default function Portfolio() {
         <motion.div className="hero-float-card hero-float-card-bottom" animate={{ y: [0, 10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: .6 }}>
           <span className="hero-float-label">SYSTEM HEALTH</span><strong><span className="signal-ping" /> 99.9% reliable</strong>
         </motion.div>
+        <motion.div className="hero-photo" initial={{ opacity: 0, scale: .92, x: 24 }} animate={{ opacity: 1, scale: 1, x: 0 }} transition={{ delay: .18, duration: .8 }}>
+          <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Polished%20Corporate%20Headshot%20with%20Warm%20Office%20Bokeh-FIM8t6NLQRUACHvQLjFB6JchFfRwn2.png" alt="Muhammad Abdullah in a navy suit" />
+          <div className="hero-photo-label"><span className="signal-ping" /> HUMAN + SYSTEMS</div>
+        </motion.div>
         <motion.div className="hero-console" initial={{ opacity: 0, scale: .94, rotate: 3 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ delay: .35, duration: .8 }} aria-label="Live engineering system map">
           <div className="hero-console-top"><span><i className="signal-ping" /> LIVE SYSTEM MAP</span><span>v5.0.26</span></div>
           <div className="system-map">
