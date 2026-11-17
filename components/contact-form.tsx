@@ -11,7 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { useToast } from "@/hooks/use-toast"
-import { Loader2, AlertTriangle } from "lucide-react"
+import { ArrowUpRight, Loader2 } from "lucide-react"
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your full name"),
@@ -106,16 +106,15 @@ export function ContactForm() {
         <CardTitle className="text-white text-xl">Send a Message</CardTitle>
       </CardHeader>
       <CardContent>
-        {!emailJsConfigured && (
-          <div className="mb-4 flex items-start gap-2 rounded-md border border-amber-400/40 bg-amber-950/30 p-3 text-amber-300">
-            <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" />
-            <p className="text-sm">
-              EmailJS is not configured yet. Add your keys: NEXT_PUBLIC_EMAILJS_SERVICE_ID,
-              NEXT_PUBLIC_EMAILJS_TEMPLATE_ID, NEXT_PUBLIC_EMAILJS_PUBLIC_KEY.
-            </p>
+        {!emailJsConfigured ? (
+          <div className="contact-fallback">
+            <p className="eyebrow">DIRECT IS BETTER</p>
+            <p>The message form isn&apos;t available right now. Send me a note directly and we can talk through the details.</p>
+            <a href="mailto:muhammadabdullah101998@gmail.com">
+              Email Muhammad <ArrowUpRight size={17} />
+            </a>
           </div>
-        )}
-
+        ) : (
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
@@ -192,6 +191,7 @@ export function ContactForm() {
             </Button>
           </div>
         </form>
+        )}
       </CardContent>
     </Card>
   )

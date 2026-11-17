@@ -1,18 +1,21 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
-import { MouseTracker } from "@/components/mouse-tracker"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "Muhammad Abdullah - Senior Software Engineer",
   description:
-    "Portfolio of Muhammad Abdullah, a Senior Software Engineer with 5 years of experience in React.js, Next.js, TypeScript, and Ruby on Rails.",
+    "Thoughtful code. Real-world impact. Muhammad Abdullah is a Senior Software Engineer building fast, scalable digital experiences with React, Next.js, Ruby on Rails, and AI.",
   generator: "v0.app",
+}
+
+export const viewport: Viewport = {
+  themeColor: [{ media: "(prefers-color-scheme: light)", color: "#f8eee2" }, { media: "(prefers-color-scheme: dark)", color: "#111d30" }],
 }
 
 export default function RootLayout({
@@ -24,8 +27,6 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <MouseTracker />
-
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-VWJTQHLPFX" strategy="afterInteractive" />
           <Script id="gtag-init" strategy="afterInteractive">
             {`window.dataLayer = window.dataLayer || [];
