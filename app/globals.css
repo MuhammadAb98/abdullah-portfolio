@@ -188,7 +188,7 @@ summary::-webkit-details-marker { display: none; }
 .about-section { background: var(--panel); padding-block: 85px; }
 .about-grid { display: grid; grid-template-columns: 0.85fr 1.15fr; align-items: center; gap: 100px; }
 .portrait-wrap { position: relative; max-width: 420px; }
-.portrait-wrap img { width: 100%; aspect-ratio: 4/4.5; object-fit: cover; object-position: center 30%; filter: saturate(0.65); border-radius: 3px; }
+.portrait-wrap img { width: 100%; aspect-ratio: 49/50; object-fit: cover; object-position: center top; filter: saturate(0.65); border-radius: 3px; }
 .portrait-note { display: block; font-size: 8px; letter-spacing: 1.7px; padding-top: 16px; }
 .about-copy > p:not(.eyebrow) { font-size: 13px; line-height: 1.9; color: var(--soft-ink); margin-top: 22px; }
 .about-copy .text-link { margin-top: 26px; border-bottom: 1px solid var(--orange); padding-bottom: 7px; }
@@ -217,6 +217,8 @@ summary::-webkit-details-marker { display: none; }
 .contact-grid { display: grid; grid-template-columns: 0.95fr 1.05fr; gap: 80px; }
 .contact-copy { display: flex; flex-direction: column; align-items: start; gap: 23px; font-size: 13px; }
 .contact-copy > p { max-width: 330px; color: #c0c6d0; line-height: 1.9; }
+.meeting-link { display: inline-flex; align-items: center; gap: 24px; padding: 13px 19px; border: 1px solid #e4b08b; border-radius: 50px; font-size: 12px; transition: background 180ms, color 180ms, transform 180ms; }
+.meeting-link:hover { background: #f8eee2; color: #102443; transform: translateY(-2px); }
 .contact-email { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 7px; overflow-wrap: anywhere; max-width: 100%; margin-top: 10px; }
 .contact-copy > span { font-size: 11px; color: #c0c6d0; }
 .contact-copy .text-link { margin-top: 16px; }

@@ -1,44 +1,54 @@
 export const skills = {
   "Programming Languages": ["JavaScript", "TypeScript", "Ruby"],
-  Frontend: ["React.js", "Next.js", "Redux Saga", "Context API", "Tailwind CSS", "Ant Design"],
-  Backend: ["Ruby on Rails", "RESTful APIs", "Node.js"],
-  Databases: ["MySQL", "PostgreSQL", "Supabase"],
-  "Cloud & DevOps": ["AWS", "Heroku", "CircleCI", "Vercel"],
-  Testing: ["Jest", "RSpec", "Capybara"],
-  "AI Integration": ["ChatGPT", "RAG", "AI-driven personalization"],
-  Tools: ["Git", "Jira", "Webpack", "Chart.js", "Lodash"],
+  Frontend: ["React.js", "Next.js", "Angular", "Redux Toolkit", "Redux Saga", "Tailwind CSS"],
+  Backend: ["Node.js", "NestJS", "Ruby on Rails", "RESTful APIs", "Microservices"],
+  Databases: ["PostgreSQL", "MySQL", "MongoDB", "Supabase", "Vector Databases"],
+  "Cloud & DevOps": ["AWS Lambda", "S3", "CloudWatch", "CircleCI", "Jenkins", "Heroku", "Vercel"],
+  "AI Integration": ["OpenAI API", "RAG", "Embedding Models", "Conversational AI"],
+  "Tools & Libraries": ["Git", "Lexical Editor", "Chart.js", "ApexCharts", "Google Maps API"],
 }
 
 export const experience = [
+  {
+    company: "Focusteck",
+    location: "Lahore, Pakistan",
+    positions: [
+      {
+        title: "Senior Software Engineer",
+        period: "Jan 2026 - Present",
+        achievements: [
+          "Delivered 4+ customer-facing features and enhancements, contributing to on-time product releases",
+          "Improved application performance by 20% through API, database, and query optimization",
+          "Resolved 10+ production issues and customer-reported defects to improve platform stability",
+          "Designed RESTful APIs and integrated third-party services to extend platform functionality",
+          "Conducted 70+ code reviews and mentored junior developers to strengthen engineering standards",
+          "Used AWS CloudWatch, Kibana, and application logs for root-cause analysis and production troubleshooting",
+        ],
+      },
+    ],
+  },
   {
     company: "Clustox",
     location: "Lahore, Pakistan",
     positions: [
       {
         title: "Senior Software Engineer",
-        period: "April 2025 - Present",
+        period: "Apr 2025 - Dec 2025",
         achievements: [
-          "Led frontend initiatives, refactored complex modules using Next.js and TypeScript for improved performance and scalability",
-          "Designed reusable UI components and implemented frontend architecture best practices, reducing tech debt across multiple projects",
-          "Integrated advanced AI-based solutions using AI Models and Retrieval-Augmented Generation (RAG) to enhance user experience",
-          "Enhanced customer-facing web application with React and Next.js, reducing load times by 40% through SSR, API optimization, lazy loading, and caching",
+          "Reduced page load times by 40% on a client-facing React and Next.js application through SSR, API optimization, lazy loading, and caching",
+          "Built pre-sales proof-of-concept applications to help prospective clients evaluate proposed solutions",
+          "Integrated production RAG solutions for context-aware document retrieval and user-facing features",
+          "Architected a reusable UI component library and frontend standards across client projects",
+          "Delivered full-stack features for an NYC-based client using React, TypeScript, Next.js, and Ruby on Rails",
         ],
       },
       {
         title: "Software Engineer",
-        period: "July 2022 - March 2025",
+        period: "Feb 2022 - Mar 2025",
         achievements: [
-          "Contributed to all phases of the software development lifecycle, including design, code reviews, testing, and deployment",
-          "Developed scalable front-end solutions using Flexbox, CSS Grids, Ant Design, and Redux Saga",
-          "Integrated Ruby on Rails-based RESTful APIs and collaborated with senior developers on complex tasks",
-        ],
-      },
-      {
-        title: "Associate Software Engineer",
-        period: "Feb 2022 - July 2022",
-        achievements: [
-          "Gained hands-on experience in software development, debugging, and testing while contributing to live projects",
-          "Collaborated with senior developers to enhance technical proficiency and industry best practices",
+          "Built and maintained scalable software with React, TypeScript, Next.js, Ruby on Rails, and RESTful APIs",
+          "Refactored legacy code, developed features, and added RSpec coverage to support reliable releases",
+          "Worked directly with an overseas client, gathering feedback, leading demos, and collaborating through Scrum",
         ],
       },
     ],
@@ -49,10 +59,10 @@ export const experience = [
     positions: [
       {
         title: "Associate Software Engineer",
-        period: "Aug 2021 – Feb 2022",
+        period: "Aug 2021 - Feb 2022",
         achievements: [
-          "Gained foundational experience in software development and testing",
-          "Worked on live projects under senior developer guidance",
+          "Contributed to production application development, debugging, testing, and maintenance",
+          "Worked with senior engineers to deliver features and resolve defects in an Agile environment",
         ],
       },
     ],
