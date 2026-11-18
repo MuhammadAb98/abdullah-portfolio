@@ -22,11 +22,10 @@ export function ParticleWord() {
     let width = 0
     let height = 0
     const pointer = { x: -1000, y: -1000 }
-    const palette = getComputedStyle(canvas)
-    const ink = palette.getPropertyValue("--ink").trim()
-    const accent = palette.getPropertyValue("--brand").trim()
-
     const draw = () => {
+      const palette = getComputedStyle(canvas)
+      const ink = palette.getPropertyValue("--ink").trim()
+      const accent = palette.getPropertyValue("--brand").trim()
       ctx.clearRect(0, 0, width, height)
       let unsettled = false
       for (const point of points) {
