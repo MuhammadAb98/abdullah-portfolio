@@ -22,7 +22,9 @@ export function ParticleWord() {
     let width = 0
     let height = 0
     const pointer = { x: -1000, y: -1000 }
-    const ink = resolvedTheme === "dark" ? "#f7ecde" : "#102443"
+    const palette = getComputedStyle(canvas)
+    const ink = palette.getPropertyValue("--ink").trim()
+    const accent = palette.getPropertyValue("--brand").trim()
 
     const draw = () => {
       ctx.clearRect(0, 0, width, height)
@@ -37,7 +39,7 @@ export function ParticleWord() {
         point.x += (targetX - point.x) * 0.15
         point.y += (targetY - point.y) * 0.15
         if (Math.abs(targetX - point.x) + Math.abs(targetY - point.y) > 0.1) unsettled = true
-        ctx.fillStyle = point.accent ? "#c77c4c" : ink
+        ctx.fillStyle = point.accent ? accent : ink
         ctx.fillRect(point.x, point.y, point.size, point.size)
       }
       frame = unsettled && visible ? requestAnimationFrame(draw) : 0
