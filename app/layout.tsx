@@ -1,11 +1,11 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-import { Inter } from "next/font/google"
+import { Space_Grotesk } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import Script from "next/script"
 
-const inter = Inter({ subsets: ["latin"] })
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], display: "swap" })
 
 export const metadata: Metadata = {
   title: "Muhammad Abdullah - Senior Software Engineer",
@@ -25,7 +25,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={spaceGrotesk.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <Script src="https://www.googletagmanager.com/gtag/js?id=G-VWJTQHLPFX" strategy="afterInteractive" />
           <Script id="gtag-init" strategy="afterInteractive">

@@ -58,7 +58,9 @@ export function ParticleWord() {
       const maskCtx = mask.getContext("2d", { willReadFrequently: true })
       if (!maskCtx) return
       const fontSize = Math.min(width * 0.39, height * 1.02)
-      maskCtx.font = `500 ${fontSize}px Arial, sans-serif`
+      maskCtx.font = `600 ${fontSize}px ${getComputedStyle(canvas).fontFamily}`
+      const measuredWidth = maskCtx.measureText("build.").width
+      if (measuredWidth > width * 0.96) maskCtx.font = `600 ${fontSize * width * 0.96 / measuredWidth}px ${getComputedStyle(canvas).fontFamily}`
       maskCtx.textAlign = "center"
       maskCtx.textBaseline = "middle"
       maskCtx.fillText("build.", width / 2, height * 0.52)
@@ -86,6 +88,7 @@ export function ParticleWord() {
     const onLeave = () => { pointer.x = -1000; pointer.y = -1000; requestDraw() }
     const resizeObserver = new ResizeObserver(resize)
     resizeObserver.observe(canvas)
+    document.fonts.addEventListener("loadingdone", resize)
     const visibilityObserver = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; if (visible) requestDraw() })
     visibilityObserver.observe(canvas)
     canvas.addEventListener("pointermove", onMove)
@@ -94,6 +97,7 @@ export function ParticleWord() {
     return () => {
       cancelAnimationFrame(frame)
       resizeObserver.disconnect()
+      document.fonts.removeEventListener("loadingdone", resize)
       visibilityObserver.disconnect()
       canvas.removeEventListener("pointermove", onMove)
       canvas.removeEventListener("pointerleave", onLeave)

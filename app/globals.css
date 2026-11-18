@@ -123,7 +123,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .skip-link { position: fixed; top: -80px; left: 16px; padding: 12px 24px; background: var(--ink); color: var(--paper); z-index: 100; }
 .skip-link:focus { top: 16px; }
 .site-header { display: flex; align-items: center; justify-content: space-between; min-height: 108px; gap: 24px; position: relative; }
-.wordmark { font-size: 30px; font-weight: 600; letter-spacing: -1.8px; }
+.wordmark { font-size: 30px; font-weight: 700; letter-spacing: -0.065em; }
 .wordmark span { color: var(--brand); }
 .desktop-nav { display: flex; align-items: center; gap: 30px; border: 1px solid var(--line); border-radius: 100px; padding: 12px 25px; font-size: 12px; }
 .desktop-nav a { transition: color 180ms; }
@@ -141,7 +141,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .hero-topline { display: flex; justify-content: space-between; gap: 16px; color: var(--soft-ink); font-size: 9px; letter-spacing: 1.3px; padding-top: 22px; }
 .particle-word { height: 405px; position: relative; margin-top: -12px; margin-bottom: 47px; }
 .particle-word canvas { width: 100%; height: 100%; position: absolute; inset: 0; }
-.particle-fallback { position: absolute; inset: 0; display: grid; place-items: center; font-family: Arial, sans-serif; font-weight: 500; font-size: clamp(140px, 31vw, 405px); line-height: 1; letter-spacing: -16px; }
+.particle-fallback { position: absolute; inset: 0; display: grid; place-items: center; font-family: inherit; font-weight: 600; font-size: clamp(140px, 31vw, 405px); line-height: 1; letter-spacing: -16px; }
 .particle-fallback.is-ready { visibility: hidden; }
 .particle-caption { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 8px; letter-spacing: 2.2px; color: var(--soft-ink); }
 .hero-intro { display: grid; grid-template-columns: 1.6fr 1fr; align-items: end; gap: 48px; }
@@ -149,7 +149,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .status-label { display: inline-flex; align-items: center; gap: 9px; margin-bottom: 22px; }
 .status-label > span { width: 6px; height: 6px; border-radius: 50%; background: var(--brand); box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 12%, transparent); }
 h1 { font-size: clamp(34px, 3.7vw, 51px); font-weight: 500; line-height: 1.12; letter-spacing: -2px; }
-h1 em, h2 em, .proof-note em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+h1 em, h2 em, .proof-note em { font-weight: 700; font-style: oblique 10deg; }
+.eyebrow, .hero-topline, .particle-caption, .portrait-note, .hero-bottom, .work-number { font-family: ui-monospace, monospace; }
 h1 em { position: relative; text-decoration: underline; text-decoration-color: var(--brand); text-underline-offset: 8px; text-decoration-thickness: 2px; }
 .hero-description { padding-bottom: 2px; }
 .hero-description > p { color: var(--soft-ink); font-size: 13px; line-height: 1.85; }
